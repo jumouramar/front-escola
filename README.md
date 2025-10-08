@@ -41,6 +41,10 @@ Fontawesome
 npm install @fortawesome/fontawesome-free
 ```
 
+```bash
+npm install @tanstack/react-query
+```
+
 ### ▶️ 3. Rodar o Projeto
 
 ```bash
