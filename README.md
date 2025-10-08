@@ -45,6 +45,8 @@ npm install @fortawesome/fontawesome-free
 npm install @tanstack/react-query
 ```
 
+npm i bootstrap-icons
+
 ### ▶️ 3. Rodar o Projeto
 
 ```bash
