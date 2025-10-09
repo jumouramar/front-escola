@@ -47,8 +47,8 @@ export default function TurmasPage() {
               <td>{turma.id}</td>
               <td>{turma.ano}</td>
               <td>{turma.periodo}</td>
-              <td>{turma.disciplina?.nome}</td>
-              <td>{turma.professor?.nome}</td>
+              <td>{turma.disciplina.nome}</td>
+              <td>{turma.professor.nome}</td>
               <td>
                 <NavLink to={`/turmas/${turma.id}`}>Ver detalhes</NavLink>
               </td>

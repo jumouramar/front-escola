@@ -21,11 +21,10 @@ export default function TurmaDetalhePage() {
     error: errorInsc,
   } = useListarInscricoes();
 
-  // Filtra apenas as inscrições da turma atual
   const inscricoesDaTurma = React.useMemo(
     () =>
       todasInscricoes.filter(
-        (i: Inscricao) => String(i.turma?.id) === String(id)
+        (i: Inscricao) => String(i.turma.id) === String(id)
       ),
     [todasInscricoes, id]
   );
@@ -54,10 +53,10 @@ export default function TurmaDetalhePage() {
         <h4>Disciplina</h4>
         <ul>
           <li>
-            <strong>Nome:</strong> {turma.disciplina?.nome}
+            <strong>Nome:</strong> {turma.disciplina.nome}
           </li>
           <li>
-            <strong>Carga Horária:</strong> {turma.disciplina?.cargaHoraria} h
+            <strong>Carga Horária:</strong> {turma.disciplina.cargaHoraria} h
           </li>
         </ul>
       </section>
@@ -66,10 +65,10 @@ export default function TurmaDetalhePage() {
         <h4>Professor</h4>
         <ul>
           <li>
-            <strong>Nome:</strong> {turma.professor?.nome}
+            <strong>Nome:</strong> {turma.professor.nome}
           </li>
           <li>
-            <strong>Email:</strong> {turma.professor?.email}
+            <strong>Email:</strong> {turma.professor.email}
           </li>
         </ul>
       </section>
