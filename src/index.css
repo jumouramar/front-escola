@@ -1,3 +1,5 @@
+/* TABLE */
+
 .default-table {
   width: 100%;
   border-collapse: collapse;
@@ -20,4 +22,13 @@
 
 .default-table tbody tr:hover {
   background-color: #fafafa;
+}
+
+/* SEARCH */
+
+.search-box {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6;
+  outline: none;
 }

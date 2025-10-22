@@ -47,6 +47,12 @@ const NavBar = () => {
                 Turmas
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/teste">
+                <i className="bi bi-card-list me-1"></i>
+                Buscar Turmas
+              </NavLink>
+            </li>
             {/* <li className="nav-item">
               <NavLink className="nav-link" to="/cadastrar-produto">
                 <i className="bi bi-database-add me-1"></i>
