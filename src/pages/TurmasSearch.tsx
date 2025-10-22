@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { NavLink } from "react-router-dom";
 import useListarTurmas from "../hooks/listarTurmas";
 
 type Professor = {
@@ -38,7 +37,7 @@ export default function TurmasSearchPage() {
 
   return (
     <div style={{ padding: 20 }}>
-      <h3 style={{ marginBottom: 15 }}>Turmas</h3>
+      <h3 style={{ marginBottom: 15 }}>Buscar</h3>
 
       <div style={{ marginBottom: 12 }}>
         <input
@@ -50,40 +49,29 @@ export default function TurmasSearchPage() {
         />
       </div>
 
-      {texto.length == 0 ? (
-        <p style={{ color: "#6b7280" }}>
-          Digite algo na barra de pesquisa para listar turmas.
-        </p>
-      ) : turmasFiltradas.length == 0 ? (
-        <p style={{ color: "#6b7280" }}>Nenhuma turma encontrada.</p>
-      ) : (
-        <table className="default-table">
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Ano</th>
-              <th>Período</th>
-              <th>Disciplina</th>
-              <th>Professor</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {turmasFiltradas.map((turma: Turma) => (
-              <tr key={turma.id}>
-                <td>{turma.id}</td>
-                <td>{turma.ano}</td>
-                <td>{turma.periodo}</td>
-                <td>{turma.disciplina.nome}</td>
-                <td>{turma.professor.nome}</td>
-                <td>
-                  <NavLink to={`/turmas/${turma.id}`}>Ver detalhes</NavLink>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 4fr", gap: 16 }}>
+        <div>
+          <h4>Turmas</h4>
+
+          {texto.length == 0 ? (
+            <p>
+              Digite o código na barra de pesquisa para encontrar uma turma.
+            </p>
+          ) : turmasFiltradas.length == 0 ? (
+            <p>Nenhuma turma encontrada.</p>
+          ) : (
+            <table className="default-table">
+              <tbody>
+                {turmasFiltradas.map((turma: Turma) => (
+                  <tr key={turma.id} style={{ cursor: "pointer" }}>
+                    <td>{turma.id}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
