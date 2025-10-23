@@ -29,22 +29,22 @@ type Aluno = {
 };
 
 export default function TurmasSearchPage() {
-  const { data, isLoading, error } = useListarTurmas();
-
   const [texto, setTexto] = useState<string>("");
   const [turmaSelecionada, setTurmaSelecionada] = useState<Turma | null>(null);
   const [paginaAtual, setPaginaAtual] = useState<number>(1);
   const itensPorPagina = 10;
 
-  const turmasFiltradas = useMemo(() => {
-    if (!texto) return [];
-    return data.filter((turma: Turma) => String(turma.id).includes(texto));
-  }, [data, texto]);
+  const { data, isLoading, error } = useListarTurmas();
 
   const { data: alunosData } = useListarAlunosPorTurma(
     turmaSelecionada?.id,
     !!turmaSelecionada
   );
+
+  const turmasFiltradas = useMemo(() => {
+    if (!texto) return [];
+    return data.filter((turma: Turma) => String(turma.id).includes(texto));
+  }, [data, texto]);
 
   useEffect(() => {
     setTurmaSelecionada(null);
@@ -60,7 +60,6 @@ export default function TurmasSearchPage() {
 
   const alunos = alunosData || [];
 
-  // paginação
   const totalPaginas = Math.ceil(alunos.length / itensPorPagina);
   const indiceInicio = (paginaAtual - 1) * itensPorPagina;
   const indiceFim = indiceInicio + itensPorPagina;
