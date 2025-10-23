@@ -20,20 +20,6 @@ const NavBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          {/* <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/carrinho">
-                <i className="bi bi-cart3 me-1"></i>
-                Carrinho
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/favoritos">
-                <i className="bi bi-heart me-1"></i>
-                Favoritos
-              </NavLink>
-            </li>
-          </ul> */}
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to="/alunos">
@@ -48,23 +34,11 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/teste">
+              <NavLink className="nav-link" to="/search">
                 <i className="bi bi-card-list me-1"></i>
                 Buscar Turmas
               </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/cadastrar-produto">
-                <i className="bi bi-database-add me-1"></i>
-                Cad. Produto
-              </NavLink>
-            </li> */}
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" to="/login">
-                <i className="bi bi-box-arrow-in-right me-1"></i>
-                Entrar
-              </NavLink>
-            </li> */}
           </ul>
         </div>
       </div>

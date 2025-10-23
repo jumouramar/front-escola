@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       },
       { path: "/alunos", element: <AlunosPage /> },
       { path: "/turmas", element: <TurmasPage /> },
-      { path: "/teste", element: <TurmasSearchPage /> },
+      { path: "/search", element: <TurmasSearchPage /> },
       { path: "/turmas/:id", element: <TurmaDetalhePage /> },
     ],
   },
