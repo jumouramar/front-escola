@@ -33,6 +33,8 @@ export default function TurmasSearchPage() {
 
   const [texto, setTexto] = useState<string>("");
   const [turmaSelecionada, setTurmaSelecionada] = useState<Turma | null>(null);
+  const [paginaAtual, setPaginaAtual] = useState<number>(1);
+  const itensPorPagina = 10;
 
   const turmasFiltradas = useMemo(() => {
     if (!texto) return [];
@@ -46,12 +48,27 @@ export default function TurmasSearchPage() {
 
   useEffect(() => {
     setTurmaSelecionada(null);
+    setPaginaAtual(1);
   }, [texto]);
+
+  useEffect(() => {
+    setPaginaAtual(1);
+  }, [turmaSelecionada]);
 
   if (isLoading) return <p>Carregando turmas...</p>;
   if (error) return <p>Erro: {(error as Error).message}</p>;
 
   const alunos = alunosData || [];
+
+  // paginação
+  const totalPaginas = Math.ceil(alunos.length / itensPorPagina);
+  const indiceInicio = (paginaAtual - 1) * itensPorPagina;
+  const indiceFim = indiceInicio + itensPorPagina;
+  const alunosPaginados = alunos.slice(indiceInicio, indiceFim);
+
+  const irParaPagina = (pagina: number) => {
+    setPaginaAtual(pagina);
+  };
 
   return (
     <div style={{ padding: 20 }}>
@@ -132,7 +149,7 @@ export default function TurmasSearchPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {alunos.map((aluno: Aluno) => (
+                  {alunosPaginados.map((aluno: Aluno) => (
                     <tr key={aluno.id}>
                       <td>{aluno.id}</td>
                       <td>{aluno.nome}</td>
@@ -141,6 +158,44 @@ export default function TurmasSearchPage() {
                   ))}
                 </tbody>
               </table>
+
+              {totalPaginas > 1 && (
+                <div
+                  style={{
+                    marginTop: 16,
+                    display: "flex",
+                    gap: 8,
+                    alignItems: "center",
+                  }}
+                >
+                  <button
+                    onClick={() => irParaPagina(paginaAtual - 1)}
+                    disabled={paginaAtual == 1}
+                    style={{
+                      padding: "6px 12px",
+                      cursor: paginaAtual == 1 ? "not-allowed" : "pointer",
+                    }}
+                  >
+                    Anterior
+                  </button>
+
+                  <span>
+                    {paginaAtual} de {totalPaginas}
+                  </span>
+
+                  <button
+                    onClick={() => irParaPagina(paginaAtual + 1)}
+                    disabled={paginaAtual == totalPaginas}
+                    style={{
+                      padding: "6px 12px",
+                      cursor:
+                        paginaAtual == totalPaginas ? "not-allowed" : "pointer",
+                    }}
+                  >
+                    Próximo
+                  </button>
+                </div>
+              )}
             </>
           )}
         </div>
