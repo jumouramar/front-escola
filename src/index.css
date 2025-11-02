@@ -32,3 +32,12 @@
   border-radius: 6;
   outline: none;
 }
+
+/* SELECT */
+
+.select-box {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6;
+  outline: none;
+}
