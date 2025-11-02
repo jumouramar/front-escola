@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useListarTurmas from "../hooks/listarTurmas";
+import useListarAlunosPorTurma from "../hooks/listarAlunosPorTurma";
 
 type Professor = {
   id: string | number;
@@ -21,23 +22,48 @@ type Turma = {
   disciplina: Disciplina;
 };
 
-export default function ClassManagePage() {
-  const [turmaSelecionada, setTurmaSelecionada] = useState<string>("");
+type Aluno = {
+  id: string | number;
+  nome: string;
+  email: string;
+};
 
+export default function ClassManagePage() {
   const { data: turmas, isLoading, error } = useListarTurmas();
+
+  const [turmaSelecionada, setTurmaSelecionada] = useState<Turma | null>(null);
+
+  const changeTurmaSelecionada = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const turma = turmas?.find(
+      (t: Turma) => t.id.toString() === e.target.value
+    );
+    setTurmaSelecionada(turma || null);
+  };
+
+  const { data: alunos } = useListarAlunosPorTurma(
+    turmaSelecionada?.id,
+    !!turmaSelecionada
+  );
 
   if (isLoading) return <p>Carregando turmas...</p>;
   if (error) return <p>Erro: {(error as Error).message}</p>;
 
   return (
     <div style={{ padding: 20 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 15,
+          marginBottom: 20,
+        }}
+      >
         <h3 style={{ margin: "0 0 0 0" }}>Turma</h3>
 
         <select
           className="select-box"
-          value={turmaSelecionada}
-          onChange={(e) => setTurmaSelecionada(e.target.value)}
+          value={turmaSelecionada?.id || ""}
+          onChange={changeTurmaSelecionada}
           style={{ padding: 8, minWidth: 280 }}
         >
           <option value="">Selecione uma turma</option>
@@ -48,6 +74,37 @@ export default function ClassManagePage() {
           ))}
         </select>
       </div>
+
+      <table className="default-table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {!turmaSelecionada ? (
+            <tr></tr>
+          ) : !alunos || alunos.length === 0 ? (
+            <tr>
+              <td>Esta turma não possui alunos cadastrados.</td>
+            </tr>
+          ) : (
+            (alunos ?? []).map((aluno: Aluno) => (
+              <tr key={aluno.id}>
+                <td>{aluno.id}</td>
+                <td>{aluno.nome}</td>
+                <td>{aluno.email}</td>
+                <td>
+                  <button>Remover</button>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -24,6 +24,13 @@
   background-color: #fafafa;
 }
 
+.default-table button {
+  padding: 6px 12px;
+  cursor: pointer;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+}
+
 /* SEARCH */
 
 .search-box {
