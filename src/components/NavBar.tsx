@@ -23,20 +23,22 @@ const NavBar = () => {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to="/alunos">
-                <i className="bi bi-card-list me-1"></i>
-                Alunos
+                <i className="bi bi-person"></i> Alunos
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/turmas">
-                <i className="bi bi-card-list me-1"></i>
-                Turmas
+                <i className="bi bi-card-list me-1"></i>Turmas
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/search">
-                <i className="bi bi-card-list me-1"></i>
-                Buscar Turmas
+                <i className="bi bi-search"></i> Buscar Turmas
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/manage_class">
+                <i className="bi bi-clipboard-data"></i> Gerenciar Turmas
               </NavLink>
             </li>
           </ul>
