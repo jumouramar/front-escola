@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useListarTurmas from "../hooks/listarTurmas";
 import useListarAlunosPorTurma from "../hooks/listarAlunosPorTurma";
 
@@ -28,8 +28,22 @@ type Aluno = {
   email: string;
 };
 
+function setGrupoAlunos(key: string, ids: Array<string | number>) {
+  localStorage.setItem(key, JSON.stringify(ids));
+}
+
+function getGrupoAlunos(key: string): Array<string | number> {
+  const raw = localStorage.getItem(key);
+  if (!raw) return [];
+  const parsed = JSON.parse(raw);
+  return Array.isArray(parsed) ? parsed : [];
+}
+
 export default function ClassManagePage() {
   const { data: turmas, isLoading, error } = useListarTurmas();
+
+  if (isLoading) return <p>Carregando turmas...</p>;
+  if (error) return <p>Erro: {(error as Error).message}</p>;
 
   const [turmaSelecionada, setTurmaSelecionada] = useState<Turma | null>(null);
 
@@ -45,8 +59,30 @@ export default function ClassManagePage() {
     !!turmaSelecionada
   );
 
-  if (isLoading) return <p>Carregando turmas...</p>;
-  if (error) return <p>Erro: {(error as Error).message}</p>;
+  const [grupoIds, setGrupoIds] = useState<Array<string | number>>([]);
+
+  const storageKey = turmaSelecionada ? turmaSelecionada.id.toString() : "";
+
+  useEffect(() => {
+    if (!storageKey) {
+      setGrupoIds([]);
+      return;
+    }
+    setGrupoIds(getGrupoAlunos(storageKey));
+  }, [storageKey]);
+
+  const changeAlunoGrupo = (alunoId: string | number) => {
+    if (!storageKey) return;
+    const atual = new Set(grupoIds);
+    if (atual.has(alunoId)) {
+      atual.delete(alunoId);
+    } else {
+      atual.add(alunoId);
+    }
+    const novo = Array.from(atual);
+    setGrupoIds(novo);
+    setGrupoAlunos(storageKey, novo);
+  };
 
   return (
     <div style={{ padding: 20 }}>
@@ -58,7 +94,7 @@ export default function ClassManagePage() {
           marginBottom: 20,
         }}
       >
-        <h3 style={{ margin: "0 0 0 0" }}>Turma</h3>
+        <h3 style={{ margin: 0 }}>Turma</h3>
 
         <select
           className="select-box"
@@ -86,22 +122,27 @@ export default function ClassManagePage() {
         </thead>
         <tbody>
           {!turmaSelecionada ? (
-            <tr></tr>
+            <p></p>
           ) : !alunos || alunos.length === 0 ? (
             <tr>
               <td>Esta turma não possui alunos cadastrados.</td>
             </tr>
           ) : (
-            (alunos ?? []).map((aluno: Aluno) => (
-              <tr key={aluno.id}>
-                <td>{aluno.id}</td>
-                <td>{aluno.nome}</td>
-                <td>{aluno.email}</td>
-                <td>
-                  <button>Remover</button>
-                </td>
-              </tr>
-            ))
+            alunos.map((aluno: Aluno) => {
+              const noGrupo = grupoIds.includes(aluno.id);
+              return (
+                <tr key={aluno.id}>
+                  <td>{aluno.id}</td>
+                  <td>{aluno.nome}</td>
+                  <td>{aluno.email}</td>
+                  <td>
+                    <button onClick={() => changeAlunoGrupo(aluno.id)}>
+                      {noGrupo ? "Remover" : "Incluir"}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
           )}
         </tbody>
       </table>
