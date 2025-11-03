@@ -42,9 +42,6 @@ function getGrupoAlunos(key: string): Array<string | number> {
 export default function ClassManagePage() {
   const { data: turmas, isLoading, error } = useListarTurmas();
 
-  if (isLoading) return <p>Carregando turmas...</p>;
-  if (error) return <p>Erro: {(error as Error).message}</p>;
-
   const [turmaSelecionada, setTurmaSelecionada] = useState<Turma | null>(null);
 
   const changeTurmaSelecionada = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -83,6 +80,9 @@ export default function ClassManagePage() {
     setGrupoIds(novo);
     setGrupoAlunos(storageKey, novo);
   };
+
+  if (isLoading) return <p>Carregando turmas...</p>;
+  if (error) return <p>Erro: {(error as Error).message}</p>;
 
   return (
     <div style={{ padding: 20 }}>
