@@ -51,6 +51,12 @@ React Form
 npm install react-hook-form
 ```
 
+Zod
+
+```bash
+npm install @hookform/resolvers react-hook-form zod
+```
+
 npm i bootstrap-icons
 
 ### ▶️ 3. Rodar o Projeto
