@@ -8,6 +8,7 @@ import HomePage from "../pages/Home";
 import TurmasSearchPage from "../pages/TurmasSearch";
 import ClassManagePage from "../pages/ClassManage";
 import StudentRegistrationPage from "../pages/StudentRegistration";
+import ClassRegistrationPage from "../pages/ClassRegistration";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
       { path: "/search", element: <TurmasSearchPage /> },
       { path: "/manage_class", element: <ClassManagePage /> },
       { path: "/turmas/:id", element: <TurmaDetalhePage /> },
-      { path: "student_registration", element: <StudentRegistrationPage /> },
+      { path: "/student_registration", element: <StudentRegistrationPage /> },
+      { path: "/class_registration", element: <ClassRegistrationPage /> },
     ],
   },
 ]);

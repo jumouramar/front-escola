@@ -32,6 +32,11 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/class_registration">
+                <i className="bi bi-person-plus"></i> Cadastrar Aluno na Turma
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/turmas">
                 <i className="bi bi-card-list me-1"></i> Listar Turmas
               </NavLink>
