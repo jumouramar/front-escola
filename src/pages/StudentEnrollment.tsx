@@ -1,7 +1,7 @@
 import InscricaoForm from "../components/InscricaoForm";
 import TurmasSearch from "../components/TurmasSearch";
 
-export default function ClassRegistrationPage() {
+export default function StudentEnrollmentPage() {
   return (
     <div style={{ padding: 20 }}>
       <h3 className="mb-4">Inscrição de Aluno na Turma</h3>
