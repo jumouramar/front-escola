@@ -1,21 +1,34 @@
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import type { Aluno } from "../interfaces/Student";
 import { useNavigate } from "react-router-dom";
 import useCadastrarAluno from "../hooks/useRegisterStudent";
 import useAlunoStore from "../store/StudentStore";
 import { useEffect } from "react";
 
-interface FormStudent {
-  nome: string;
-  email: string;
-}
+const formSchema = z.object({
+  nome: z.string().min(3, "Nome deve ter no mínimo 3 caracteres"),
+  email: z.string().email("Email inválido"),
+});
+
+type FormStudent = z.infer<typeof formSchema>;
 
 export default function StudentForm() {
   const setMensagem = useAlunoStore((s) => s.setMensagem);
   const alunoSelecionado = useAlunoStore((s) => s.alunoSelecionado);
 
   const navigate = useNavigate();
-  const { register, handleSubmit, reset, setValue } = useForm<FormStudent>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<FormStudent>({
+    resolver: zodResolver(formSchema),
+  });
+
   const { mutate: cadastrarAluno, error: errorCadastrarAluno } =
     useCadastrarAluno();
 
@@ -62,6 +75,9 @@ export default function StudentForm() {
               id="nome"
               className="form-control form-control-sm"
             />
+            {errors.nome && (
+              <span className="text-danger small">{errors.nome.message}</span>
+            )}
           </div>
 
           <div className="mb-2">
@@ -74,6 +90,9 @@ export default function StudentForm() {
               id="email"
               className="form-control form-control-sm"
             />
+            {errors.email && (
+              <span className="text-danger small">{errors.email.message}</span>
+            )}
           </div>
         </div>
       </div>
