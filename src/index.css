@@ -1,7 +1,11 @@
 /* NAVBAR */
 
-.navbar {
+.custom-bg {
   background-color: #004f9f;
+}
+
+.dropdown-menu-dark {
+  background-color: #004f9f !important;
 }
 
 .navbar * {
