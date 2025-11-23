@@ -45,6 +45,22 @@ npm install @fortawesome/fontawesome-free
 npm install @tanstack/react-query
 ```
 
+React Form
+
+```bash
+npm install react-hook-form
+```
+
+Zod
+
+```bash
+npm install @hookform/resolvers react-hook-form zod
+```
+
+```bash
+npm install zustand
+```
+
 npm i bootstrap-icons
 
 ### ▶️ 3. Rodar o Projeto
