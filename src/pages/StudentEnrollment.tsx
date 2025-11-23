@@ -1,6 +1,7 @@
 import { EnrollmentForm } from "../components/EnrollmentForm";
 import { TabelaDeAlunosPorTurma } from "../components/TabelaDeAlunosPorTurma";
 import { Pesquisa } from "../components/Pesquisa";
+import { Paginacao } from "../components/Paginacao";
 
 export default function StudentEnrollmentPage() {
   return (
@@ -10,7 +11,7 @@ export default function StudentEnrollmentPage() {
       <hr className="mb-4 mt-4" />
       <Pesquisa />
       <TabelaDeAlunosPorTurma />
-      {/*<Paginacao /> */}
+      <Paginacao />
     </div>
   );
 }
