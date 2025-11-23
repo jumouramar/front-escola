@@ -20,6 +20,7 @@ export function AlunoComboBox() {
 
   return (
     <select
+      className="select-box2"
       value={alunoIdSelecionado ?? ""}
       onChange={(e) =>
         setAlunoIdSelecionado(e.target.value ? Number(e.target.value) : null)

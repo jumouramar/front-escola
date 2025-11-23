@@ -12,6 +12,7 @@ export function DisciplinaComboBox() {
 
   return (
     <select
+      className="select-box2"
       value={disciplinaIdSelecionada ?? ""}
       onChange={(e) =>
         setDisciplinaIdSelecionada(

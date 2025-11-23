@@ -28,30 +28,28 @@ export function EnrollmentForm() {
   return (
     <div>
       <div style={{ marginBottom: 8 }}>
-        <label>
-          <strong>Disciplina: </strong>
-        </label>
+        <label className="fw-bold">Disciplina:</label>
         <br />
         <DisciplinaComboBox />
       </div>
 
       <div style={{ marginBottom: 8 }}>
-        <label>
-          <strong>Turma: </strong>
-        </label>
+        <label className="fw-bold">Turma:</label>
         <br />
         <TurmaComboBox />
       </div>
 
-      <div style={{ marginBottom: 8 }}>
-        <label>
-          <strong>Aluno: </strong>
-        </label>
+      <div style={{ marginBottom: 16 }}>
+        <label className="fw-bold">Aluno:</label>
         <br />
         <AlunoComboBox />
       </div>
 
-      <button disabled={!podeInscrever} onClick={handleInscrever}>
+      <button
+        className="btn btn-success btn-sm d-flex align-items-center me-3"
+        disabled={!podeInscrever}
+        onClick={handleInscrever}
+      >
         {"Inscrever Aluno"}
       </button>
     </div>

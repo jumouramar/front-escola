@@ -20,6 +20,7 @@ export function TurmaComboBox() {
 
   return (
     <select
+      className="select-box2"
       value={turmaIdSelecionada ?? ""}
       onChange={(e) =>
         setTurmaIdSelecionada(e.target.value ? Number(e.target.value) : null)
