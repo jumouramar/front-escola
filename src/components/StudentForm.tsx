@@ -5,6 +5,7 @@ import type { Aluno } from "../interfaces/Student";
 import { useNavigate } from "react-router-dom";
 import useCadastrarAluno from "../hooks/useRegisterStudent";
 import useAlunoStore from "../store/StudentStore";
+import useTokenStore from "../store/TokenStore";
 import { useEffect } from "react";
 
 const formSchema = z.object({
@@ -17,6 +18,7 @@ type FormStudent = z.infer<typeof formSchema>;
 export default function StudentForm() {
   const setMensagem = useAlunoStore((s) => s.setMensagem);
   const alunoSelecionado = useAlunoStore((s) => s.alunoSelecionado);
+  const userRole = useTokenStore((s) => s.tokenResponse.role);
 
   const navigate = useNavigate();
   const {
@@ -101,6 +103,7 @@ export default function StudentForm() {
         <button
           type="submit"
           className="btn btn-success btn-sm d-flex align-items-center me-3"
+          disabled={userRole !== "ADMIN"}
         >
           Cadastrar
         </button>
