@@ -1,7 +1,14 @@
 import { NavLink } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import useTokenStore from "../store/TokenStore";
 
 export default function NavBar() {
+  const tokenResponse = useTokenStore((s) => s.tokenResponse);
+
+  const isLogged = !!tokenResponse?.token;
+  const userName = tokenResponse?.nome || "";
+  const userRole = tokenResponse?.role || "";
+
   return (
     <nav className="navbar navbar-expand-lg custom-bg">
       <div className="container">
@@ -79,6 +86,35 @@ export default function NavBar() {
                 </li>
               </ul>
             </li>
+
+            {userRole === "ADMIN" && (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="bi bi-people"></i> Usuários
+                </a>
+                <ul className="dropdown-menu dropdown-menu-dark">
+                  <li>
+                    <NavLink className="dropdown-item" to="/user_registration">
+                      <i className="bi bi-person-plus"></i> Cadastrar
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            )}
+
+            {isLogged && (
+              <li className="nav-item">
+                <span className="nav-link">
+                  <i className="bi bi-person-circle"></i> {userName}
+                </span>
+              </li>
+            )}
           </ul>
         </div>
       </div>
