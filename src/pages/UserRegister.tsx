@@ -1,7 +1,7 @@
-import LoginForm from "../components/LoginForm";
+import UserRegisterForm from "../components/UserRegisterForm";
 import { Link } from "react-router-dom";
 
-export default function LoginPage() {
+export default function UserRegisterPage() {
   return (
     <div
       className="d-flex justify-content-center align-items-center vh-100"
@@ -9,14 +9,14 @@ export default function LoginPage() {
     >
       <div className="bg-white p-4 rounded shadow">
         <div className="mb-4 text-center">
-          <h3>Login</h3>
+          <h3>Cadastro de Usuário</h3>
         </div>
 
-        <LoginForm />
+        <UserRegisterForm />
 
         <div className="mt-3 text-center">
-          <span className="me-1">Ainda não tem conta?</span>
-          <Link to="/user_registration">Registre-se</Link>
+          <span className="me-1">Já tem conta?</span>
+          <Link to="/login">Faça login</Link>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import StudentRegistrationPage from "../pages/StudentRegistration";
 import StudentEnrollmentPage from "../pages/StudentEnrollment";
 import StudentPage from "../pages/StudentPage";
 import LoginPage from "../pages/Login";
-// import RegisterPage from "../pages/Register";
+import UserRegisterPage from "../pages/UserRegister";
 import ErrorPage from "../pages/Error";
 import PrivateRoutes from "./PrivateRoutes";
 import StudentRemovalPage from "../pages/StudentRemoval";
@@ -21,11 +21,11 @@ const router = createBrowserRouter([
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
-  // {
-  //   path: "/register",
-  //   element: <RegisterPage />,
-  //   errorElement: <ErrorPage />,
-  // },
+  {
+    path: "/user_registration",
+    element: <UserRegisterPage />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: "/",
     element: <PrivateRoutes />,
