@@ -13,6 +13,7 @@ import LoginPage from "../pages/Login";
 // import RegisterPage from "../pages/Register";
 import ErrorPage from "../pages/Error";
 import PrivateRoutes from "./PrivateRoutes";
+import StudentRemovalPage from "../pages/StudentRemoval";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: "manage_class", element: <ClassManagePage /> },
       { path: "turmas/:id", element: <TurmaDetalhePage /> },
       { path: "student_registration", element: <StudentRegistrationPage /> },
+      { path: "student_removal", element: <StudentRemovalPage /> },
       {
         path: "student_enrollment",
         element: <StudentEnrollmentPage />,

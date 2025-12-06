@@ -55,6 +55,11 @@ export default function NavBar() {
                     <i className="bi bi-clipboard"></i> Inscrever
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink className="dropdown-item" to="/student_removal">
+                    <i className="bi bi-person-dash"></i> Remover
+                  </NavLink>
+                </li>
               </ul>
             </li>
 
